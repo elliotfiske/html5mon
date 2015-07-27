@@ -1,0 +1,4 @@
+
+Juicy.Component.create('Monster', {
+
+});
