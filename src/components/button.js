@@ -9,8 +9,7 @@ Juicy.Component.create('Button', {
         this.state = BUTTON_STATE_IDLE;
         this.hoverAction = function(button) { };
         this.pressAction = function(button) { };
-        this.
-        this.resetAnimations = function() { };
+        this.resetAnimations = function(button) { };
     },
 
     checkMouseOver: function(mousePoint) {
@@ -45,7 +44,7 @@ Juicy.Component.create('Button', {
         }
     },
 
-    checkMouseClick: function() {
+    checkMouseDown: function() {
         if (this.state == BUTTON_STATE_DISABLED) {
             return;
         }

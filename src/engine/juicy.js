@@ -89,8 +89,7 @@
       }
       canvas.onmousemove = function(evt) {
          evt = self.getCanvasCoords(evt);
-         self.mouse.x = evt.x;
-         self.mouse.y = evt.y;
+         self.mouseMoved(evt.x, evt.y);
       }
 
       return this.resize();
@@ -134,6 +133,11 @@
       if (this.state)
          this.state.click(x, y);
    };
+
+   Game.prototype.mouseMoved = function(x, y) {
+      if (this.state)
+         this.state.mouseMoved(x, y);
+   }
 
    Game.prototype.update = function() {
       if (!this.running)
