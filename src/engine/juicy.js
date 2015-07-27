@@ -83,9 +83,13 @@
       this.context = canvas.getContext('2d');
 
       var self = this;
-      canvas.onclick = function(evt) {
+      canvas.onmousedown = function(evt) {
          evt = self.getCanvasCoords(evt);
-         self.click(evt.x, evt.y);
+         self.mouseDown(evt.x, evt.y);
+      }
+      canvas.onmouseup = function(evt) {
+         evt = self.getCanvasCoords(evt);
+         self.mouseUp(evt.x, evt.y);
       }
       canvas.onmousemove = function(evt) {
          evt = self.getCanvasCoords(evt);
@@ -129,9 +133,14 @@
       return this; // Enable chaining
    };
 
-   Game.prototype.click = function(x, y) {
+   Game.prototype.mouseDown = function(x, y) {
       if (this.state)
-         this.state.click(x, y);
+         this.state.mouseDown(x, y);
+   };
+   
+   Game.prototype.mouseUp = function(x, y) {
+      if (this.state)
+         this.state.mouseUp(x, y);
    };
 
    Game.prototype.mouseMoved = function(x, y) {
@@ -227,7 +236,9 @@
    var Scene = Juicy.Scene   = function() { this.entities = []; };
    Juicy.State = Juicy.Screen= Juicy.Scene;
    Scene.prototype.init      = function() {};
-   Scene.prototype.click     = function(x, y) {};
+   Scene.prototype.mouseDown = function(x, y) {};
+   Scene.prototype.mouseUp   = function() {};
+   Scene.prototype.mouseMoved= function(x, y) {};
    Scene.prototype.onKey     = {};
    Scene.prototype.update    = function(dt, input) { return true; };
    Scene.prototype.render    = function(context) {};
