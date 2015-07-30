@@ -1,6 +1,6 @@
 <?php
 
-include("analyticstracking.php"); 
+//include("analyticstracking.php"); 
 
 function printRandomItem($array) {
     echo $array[array_rand($array)]; 
@@ -25,6 +25,11 @@ $firstname1 = array(
 "Tingle",
 "Polar",
 "Doodle",
+"Brownie",
+"Thimble",
+"Funky",
+"Fun",
+"Rumple",
 );
 
 $firstname2 = array(
@@ -40,6 +45,7 @@ $firstname2 = array(
 "bee",
 "bear",
 "butt",
+"feather",
 );
 
 $lastname1 = array(
@@ -64,7 +70,16 @@ $lastname1 = array(
 "Stinker",
 "Snicker",
 "Salty",
+"Turtle",
+"Un",
+"Fun",
+"Leg",
+"Rumple",
+"Monkey",
+"Rude",
+"Hairy",
 );
+
 
 $lastname2 = array(
 "melon",
@@ -78,6 +93,17 @@ $lastname2 = array(
 "doodle",
 "salmon",
 "fish",
+"bottom",
+"poodle",
+"caper",
+"muscle",
+"asaurus",
+"skeleton",
+"draxx",
+"sklounst",
+"chunk",
+"armpit",
+"piece",
 );
 
 printRandomItem($firstname1);
