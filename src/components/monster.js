@@ -35,7 +35,7 @@ Juicy.Component.create('Monster', {
                 newImg.src = 'img/' + texName + '.png' + atTooEx;
 
                 if (this.parts[i].colorable) {
-                    
+                    $(newImg).css('background-color', 'red');
                 }
 
                 this.partImgDict[texName] = newImg;
@@ -60,6 +60,14 @@ Juicy.Component.create('Monster', {
             partX = partY = 0;
         }
 
-        context.drawImage(this.partImgDict[part.textureName], this.x + partX, this.y + partY);
+        context.save();
+
+        context.translate(-this.x, -this.y);
+//         context.scale(part.scaleFactor, part.scaleFactor);
+        context.rotate(part.orbitalAngle + part.userAngle);
+//         context.translate(partX/2, partY/2);
+        context.translate(this.x, this.y);
+        context.drawImage(this.partImgDict[part.textureName], this.x, this.y);
+        context.restore();
     },
 });
