@@ -46,6 +46,8 @@ $firstname2 = array(
 "bear",
 "butt",
 "feather",
+"muffin",
+"ish",
 );
 
 $lastname1 = array(
@@ -75,9 +77,11 @@ $lastname1 = array(
 "Fun",
 "Leg",
 "Rumple",
-"Monkey",
 "Rude",
 "Hairy",
+"Cookie",
+"Twitter",
+"Apple",
 );
 
 
@@ -104,6 +108,13 @@ $lastname2 = array(
 "chunk",
 "armpit",
 "piece",
+"fight",
+"wing",
+"muffin",
+"monster",
+"blaster",
+"monger",
+"bot",
 );
 
 printRandomItem($firstname1);
