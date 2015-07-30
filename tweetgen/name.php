@@ -1,6 +1,6 @@
 <?php
 
-//include("analyticstracking.php"); 
+include("analyticstracking.php"); 
 
 function printRandomItem($array) {
     echo $array[array_rand($array)]; 
