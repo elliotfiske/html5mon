@@ -18,6 +18,7 @@ isRetina = function() {
 Juicy.Component.create('Monster', {
     constructor: function() {
         this.parts = mon2;
+        this.imageParts = [];
         this.partImgDict = {};
         this.loadParts(); 
 
@@ -34,32 +35,33 @@ Juicy.Component.create('Monster', {
         for (var i = 0; i < this.parts.length; i++) {
             var texName = this.parts[i].textureName;
             if ( !(this.partImgDict.hasOwnProperty(texName)) ) {
-//                 var newImg = new Image();
-//                 var atTooEx = isRetina() ? '@2x' : '';
-//                 newImg.src = 'img/' + texName + '.png' + atTooEx;
+                var newImg = new Juicy.Entity(this, ['Image']);
+                newImg.setImage('img/' + this.parts[i].textureName + '.png', 'blue');
+                newImg.transform.position.x = this.parts[i].x;
+                newImg.transform.position.y = this.parts[i].y;
 
-
-                this.partImgDict[texName] = newImg;
+//                 this.partImgDict[texName] = newImg;
+                this.imageParts.push(newImg);
             }
         }
     },
     
     render: function(context) {
-        for (var i = 0; i < this.parts.length; i++) {
-            var part = this.parts[i];
+        for (var i = 0; i < this.imageParts.length; i++) {
+            var part = this.imageParts[i];
 
-            if (this.partImgDict[part.textureName].complete) {
+//             if (this.partImgDict[part.textureName].complete) {
                 this.drawPart(part, context);
-            }
+//             }
         }
     },
 
     drawPart: function(part, context) {
         var partX = part.x, partY = part.y;
 
-        var image = this.partImgDict[part.textureName];
-        var anchorAdjustX = image.width * part.anchorX;
-        var anchorAdjustY = image.height * part.anchorY;
+//         var image = this.partImgDict[part.textureName];
+        var anchorAdjustX = part.transform.width * part.anchorX;
+        var anchorAdjustY = part.transform.height * part.anchorY;
 
         if (part.type == "body") {
             partX = partY = 0;
@@ -74,29 +76,9 @@ Juicy.Component.create('Monster', {
         context.translate(anchorAdjustX, -anchorAdjustY);
 //         context.translate(-this.x, -this.y);
         
-            arguments[0] = this.tintOverlay;
-//             context.drawImage.apply(context, arguments);
+            part.render(context);
 //         context.drawImage(image, 0, 0);
         context.restore();
     },
 
-
-      applyTint: function(image, color) {
-         // Create an offscreen buffer
-         this.tintOverlay.width = image.width;
-         this.tintOverlay.height = image.height;
-
-         var context = this.tintOverlay.getContext('2d');
-
-         // Fill offscreen buffer with tint color
-         context.fillStyle = color;
-         context.fillRect(0, 0, image.width, image.height);
-      
-         // destination atop makes a result with an alpha channel identical to fg,
-         // but with all pixels retaining their original color *as far as I can tell*
-         context.globalCompositeOperation = "destination-atop";
-         context.globalAlpha = 0.75;
-         context.drawImage(image, 0, 0);
-         context.globalAlpha = 1;
-      },
 });
