@@ -22,8 +22,8 @@ Juicy.Component.create('Monster', {
         this.partImgDict = {};
         this.loadParts(); 
 
-        this.x = 0;
-        this.y = 0;
+        this.x = 400;
+        this.y = 400;
 
         this.tintOverlay = document.createElement('canvas');
 //         this.applyTint(image, "white");
@@ -43,8 +43,8 @@ Juicy.Component.create('Monster', {
             else {
                 partImage.setImage('img/' + this.parts[i].textureName + '.png');
             }
-            partImage.transform.position.x = this.parts[i].x;
-            partImage.transform.position.y = this.parts[i].y;
+            partImage.transform.position.x = 0;
+            partImage.transform.position.y = 0;
             partImage.ob = part;
 
             this.imageParts.push(partImage);      
