@@ -1,6 +1,11 @@
 var PlayScreen = Juicy.State.extend({
     constructor: function() {
-       this.monster = new Juicy.Entity(this, ['Monster', 'Animations', 'Button']); 
+       this.monster = new Juicy.Entity(this, ['Monster', 'Animations', 'Button']);
+        this.thing = new Juicy.Entity(this, ['Image']);
+        this.thing.setImage('img/body2.png', 'blue');
+        this.thing.transform.position.x = 100;
+        this.thing.transform.position.y = 100;
+
 
         // TODO: add monster mouse events
     },
@@ -27,5 +32,6 @@ var PlayScreen = Juicy.State.extend({
 
     render: function(context) {
         this.monster.render(context);
+        this.thing.render(context);
     },
 });
