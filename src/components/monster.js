@@ -22,8 +22,8 @@ Juicy.Component.create('Monster', {
         this.partImgDict = {};
         this.loadParts(); 
 
-//         this.x = 400;
-//         this.y = 400;
+        this.x = 0;
+        this.y = 0;
 
         this.tintOverlay = document.createElement('canvas');
 //         this.applyTint(image, "white");
@@ -33,16 +33,21 @@ Juicy.Component.create('Monster', {
     // Populate the image -> part dictionary
     loadParts: function() {
         for (var i = 0; i < this.parts.length; i++) {
-            var texName = this.parts[i].textureName;
-            if ( !(this.partImgDict.hasOwnProperty(texName)) ) {
-                var newImg = new Juicy.Entity(this, ['Image']);
-                newImg.setImage('img/' + this.parts[i].textureName + '.png', 'blue');
-                newImg.transform.position.x = this.parts[i].x;
-                newImg.transform.position.y = this.parts[i].y;
+            var part = this.parts[i];
 
-//                 this.partImgDict[texName] = newImg;
-                this.imageParts.push(newImg);
+            var partImage = new Juicy.Entity(this, ['Image']);
+            if (part.colorable) {
+                var partColor = 'rgb(' + Math.floor(part.colorR*255) + ', ' + Math.floor(part.colorG*255) + ', ' + Math.floor(part.colorB*255) + ')'
+                partImage.setImage('http://elliotfiske.com/html5mon/img/' + this.parts[i].textureName + '.png', partColor);
+             }
+            else {
+                partImage.setImage('img/' + this.parts[i].textureName + '.png');
             }
+            partImage.transform.position.x = this.parts[i].x;
+            partImage.transform.position.y = this.parts[i].y;
+            partImage.ob = part;
+
+            this.imageParts.push(partImage);      
         }
     },
     
@@ -57,25 +62,25 @@ Juicy.Component.create('Monster', {
     },
 
     drawPart: function(part, context) {
-        var partX = part.x, partY = part.y;
+        var partX = part.ob.x, partY = part.ob.y;
 
 //         var image = this.partImgDict[part.textureName];
-        var anchorAdjustX = part.transform.width * part.anchorX;
-        var anchorAdjustY = part.transform.height * part.anchorY;
+        var anchorAdjustX = part.transform.width * part.ob.anchorX;
+        var anchorAdjustY = part.transform.height * part.ob.anchorY;
 
-        if (part.type == "body") {
-            partX = partY = 0;
+        if (part.ob.type == "body") {
+            partX = 0;
+            partY = 0;
         }
 
         context.save();
 
         context.translate(this.x, this.y);
         context.translate(partX, partY);
-        context.rotate(part.orbitalAngle + part.userAngle);
-        context.scale(part.scaleFactor, part.scaleFactor);
+        context.rotate(part.ob.orbitalAngle + part.ob.userAngle);
+        context.scale(part.ob.scaleFactor, part.ob.scaleFactor);
         context.translate(anchorAdjustX, -anchorAdjustY);
 //         context.translate(-this.x, -this.y);
-        
             part.render(context);
 //         context.drawImage(image, 0, 0);
         context.restore();

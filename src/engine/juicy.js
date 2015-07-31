@@ -331,7 +331,7 @@
    Entity.prototype.render = function(context) {
       context.save();
       var pos = this.transform.position;
-      context.translate(pos.x, pos.y);
+//       context.translate(pos.x, pos.y);
       context.scale(this.transform.scale.x, this.transform.scale.y);
       
       if(this.components.Animations) {
@@ -548,6 +548,7 @@
          this.opacity = 1;
 
          this.image = new Image();
+//          this.image.crossOrigin = "anonymous";
          this.image.onload = function() {
             if (!entity.transform.width || !entity.transform.height) {
                entity.transform.width  = this.width;
