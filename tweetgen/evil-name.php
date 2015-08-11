@@ -12,7 +12,7 @@ $firstname1 = array(
 "Wicked",
 "Unreasonable",
 "Booty",
-"Butt,"
+"Butt",
 "Bob",
 "Devil",
 "Ugly",
