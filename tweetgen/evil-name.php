@@ -152,9 +152,10 @@ else if ($whuh == 1) {
 else {
     // The <Adjective> <Noun>
     printRandomItem($descriptiveAdjective);
+    echo ' ';
     printRandomItem($badNoun);
 }
 
-echp PHP_EOL;
+echo PHP_EOL;
 
 ?>
